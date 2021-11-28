@@ -1,4 +1,22 @@
-document.addEventListener('DOMContentLoaded', draw, false);
+document.addEventListener('DOMContentLoaded', init, false);
+
+function init(){
+	// draw the wallpaper
+	draw();
+	// download button
+	document.getElementById('download').onclick = function() {
+		const canvas = document.querySelector('canvas');
+		let imageData = canvas.toDataURL( 'image/png', 1 );
+		// create temporary link  
+		var tmpLink = document.createElement( 'a' );  
+		tmpLink.download = 'wallpaper.png';
+		tmpLink.href = imageData;
+		// temporarily add link to body and initiate the download  
+		document.body.appendChild( tmpLink );  
+		tmpLink.click();  
+		document.body.removeChild( tmpLink );
+	};
+}
 
 function draw(){
 	const canvas = document.querySelector('canvas');
